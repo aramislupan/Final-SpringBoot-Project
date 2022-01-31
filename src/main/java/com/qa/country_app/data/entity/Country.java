@@ -2,30 +2,47 @@ package com.qa.country_app.data.entity;
 
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
+
+
+@Entity
+@Table(name = "country")
 public class Country {
 	
+	@Id
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Long id;
 	
 	@NotNull
+	@Length(min = 1, message = "Country cannot be empty")
 	private String country;
+	
 	@NotNull
+	@Length(min = 1, message = "Capital cannot be empty")
 	private String capital;
+	
 	@NotNull
+	@Length(min = 1, message = "Continent cannot be empty")
 	private String continent;
 	
-	@Max(1415) // Not added - No constraints
-	@Min(1) // Not added - No constraints
-	private int population;
+	@Max(1415) 
+	@Min(1) 
+	private Integer population;
 	
 	public Country() {
 		super();
 	}
 	
-	public Country(String country, String capital, String continent, int population) {
+	public Country(String country, String capital, String continent, Integer population) {
 		super();
 		
 		this.country = country;
@@ -34,14 +51,14 @@ public class Country {
 		this.population = population;
 	}
 	
-	public Country(long id, String country, String capital, String continent, int population) {
-		super();
-		this.id = id;
-		this.country = country;
-		this.capital = capital;
-		this.continent = continent;
-		this.population = population;
-	}
+//	public Country(long id, String country, String capital, String continent, int population) {
+//		super();
+//		this.id = id;
+//		this.country = country;
+//		this.capital = capital;
+//		this.continent = continent;
+//		this.population = population;
+//	}
 
 	public Long getId() {
 		return id;
