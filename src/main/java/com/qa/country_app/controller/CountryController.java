@@ -1,11 +1,13 @@
 package com.qa.country_app.controller;
 
+import java.net.http.HttpHeaders;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,8 +34,9 @@ public class CountryController {
 	
 	//Read all
 	@GetMapping
-	public List<Country> getCountries() {
-		return null;
+	public ResponseEntity<List<Country>> getCountries() {
+		ResponseEntity<List<Country>> countries = ResponseEntity.ok(countryService.getAll());
+		return countries;
 	}
 	
 	//Read by Id
@@ -43,10 +46,16 @@ public class CountryController {
 	}
 	
 	//Create
-	@PostMapping
-	public Country createCountry(@Valid @RequestBody Country country) {
-		return null;
-	}
+//	@PostMapping
+//	public Country createCountry(@Valid @RequestBody Country country) {
+//		Country savedCountry = countryService.create(country);
+//		
+//		HttpHeaders headers = new HttpHeaders(null);
+//		headers.add("Location", "/country/" + String.valueOf(savedCountry.getId()));
+//		
+//		ResponseEntity<Country> response = new ResponseEntity(savedCountry, headers, HttpStatus.CREATED);
+//		return response;
+//	}
 	
 	//Update
 	@PutMapping("/{id}")
@@ -54,6 +63,7 @@ public class CountryController {
 		return null;
 	}
 	
+	//Delete
 	@DeleteMapping("/{id}") 
 	public void deleteCountry (@PathVariable("id") long id){
 		
