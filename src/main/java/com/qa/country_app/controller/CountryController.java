@@ -1,11 +1,12 @@
 package com.qa.country_app.controller;
 
-import java.net.http.HttpHeaders;
+
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.country_app.data.entity.Country;
 import com.qa.country_app.service.CountryService;
+
 
 @RestController
 @RequestMapping (path = "/country")
@@ -41,21 +43,24 @@ public class CountryController {
 	
 	//Read by Id
 	@RequestMapping (path = "/{id}", method = {RequestMethod.GET})
-	public Country getUserById(@PathVariable("id") long id) {
-		return null;
+	public ResponseEntity<Country> getUserById(@PathVariable("id") long id) {
+		Country savedCountry = countryService.getById(id);
+		
+		ResponseEntity<Country> response = ResponseEntity.status(HttpStatus.OK).body(savedCountry);
+		return response;
 	}
 	
 	//Create
-//	@PostMapping
-//	public Country createCountry(@Valid @RequestBody Country country) {
-//		Country savedCountry = countryService.create(country);
-//		
-//		HttpHeaders headers = new HttpHeaders(null);
-//		headers.add("Location", "/country/" + String.valueOf(savedCountry.getId()));
-//		
-//		ResponseEntity<Country> response = new ResponseEntity(savedCountry, headers, HttpStatus.CREATED);
-//		return response;
-//	}
+	@PostMapping
+	public ResponseEntity<Country> createCountry(@Valid @RequestBody Country country) {
+		Country savedCountry = countryService.create(country);
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Location", "/country/" + String.valueOf(savedCountry.getId()));
+		
+		ResponseEntity<Country> response = new ResponseEntity<Country>(savedCountry, headers, HttpStatus.CREATED);
+		return response;
+	}
 	
 	//Update
 	@PutMapping("/{id}")
