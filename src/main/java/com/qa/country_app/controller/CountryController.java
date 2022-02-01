@@ -64,13 +64,19 @@ public class CountryController {
 	
 	//Update
 	@PutMapping("/{id}")
-	public Country updateCountry(@PathVariable("id") long id, @Valid @RequestBody Country country) {
-		return null;
+	public ResponseEntity<Country> updateCountry(@PathVariable("id") long id, @Valid @RequestBody Country country) {
+		Country updatedCountry = countryService.update(id, country);
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Location", "/user/" + String.valueOf(updatedCountry.getId()));
+		
+		return new ResponseEntity<Country>(updatedCountry, headers, HttpStatus.ACCEPTED);
 	}
 	
 	//Delete
 	@DeleteMapping("/{id}") 
-	public void deleteCountry (@PathVariable("id") long id){
-		
+	public ResponseEntity<Country> deleteCountry (@PathVariable("id") long id){
+		countryService.delete(id);
+		return ResponseEntity.accepted().build();
 	}
 }
