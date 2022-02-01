@@ -22,20 +22,18 @@ The project can be expanded by adding more data including links to maps, populat
 
 # API Output in Postman
 
-In progress
-[Postman Requests](docs/Postman requests_API Calls document.pdf)
+For Postman requests & API calls tests refer to document "Postman requests_API Calls document.pdf": [Postman Requests](docs/)
 
 # Database Persistence SQL/H2
 
-In progress
-[SQL Database](docs/Database Persistence document_SQL.pdf)
-[H2 Database](docs/Database Persistence document_H2.pdf)
+For SQL database persistence tests refer to document "Database Persistence document_SQL.pdf": [SQL Database](docs/)
+
+For H2 database persistence tests refer to document "Database Persistence document_H2.pdf": [H2 Database](docs/)
 
 # Tests SQL/H2
 
-In progress
-[Results & Coverage Report](docs/)
+In progress: [Results & Coverage Report](docs/) 
 
 # Agile & Project Management
 
-https://camilosa.atlassian.net/jira/software/projects/FSP/boards/2
+Jira Board: https://camilosa.atlassian.net/jira/software/projects/FSP/boards/2
