@@ -1,12 +1,14 @@
 package com.qa.country_app.controller;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+
 import java.util.List;
 
-import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,78 +20,63 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.country_app.data.entity.Country;
+import com.qa.country_app.service.CountryService;
+
 
 @RestController
 @RequestMapping (path = "/country")
 public class CountryController {
 	
-	private static long counter = 0;
+	private CountryService countryService;
 	
-	private List<Country> countries = new ArrayList<>(List.of(new Country(counter++, "England", "London", "Europe", 56),
-															  new Country(counter++, "Brazil", "Brasilia", "South America", 210),
-															  new Country(counter++, "China", "Beijing", "Asia", 1412)));
+	@Autowired
+	public CountryController(CountryService countryService) {
+		this.countryService = countryService;
+	}
 	
+	//Read all
 	@GetMapping
-	public List<Country> getCountries() {
+	public ResponseEntity<List<Country>> getCountries() {
+		ResponseEntity<List<Country>> countries = ResponseEntity.ok(countryService.getAll());
 		return countries;
 	}
 	
+	//Read by Id
 	@RequestMapping (path = "/{id}", method = {RequestMethod.GET})
-	public Country getUserById(@PathVariable("id") int id) { //changed from Integer(error) to int - to review
-		for (Country country : countries) {
-			if(country.getId() == id) {
-				return country;
-			}
-		}
-		throw new EntityNotFoundException("Entity with id " + id + " was not found");
-	}
-	
-	@PostMapping
-	public Country createCountry(@Valid @RequestBody Country country) {
+	public ResponseEntity<Country> getUserById(@PathVariable("id") long id) {
+		Country savedCountry = countryService.getById(id);
 		
-		country.setId(counter++);
-		countries.add(country);
-		return country;
+		ResponseEntity<Country> response = ResponseEntity.status(HttpStatus.OK).body(savedCountry);
+		return response;
 	}
 	
+	//Create
+	@PostMapping
+	public ResponseEntity<Country> createCountry(@Valid @RequestBody Country country) {
+		Country savedCountry = countryService.create(country);
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Location", "/country/" + String.valueOf(savedCountry.getId()));
+		
+		ResponseEntity<Country> response = new ResponseEntity<Country>(savedCountry, headers, HttpStatus.CREATED);
+		return response;
+	}
+	
+	//Update
 	@PutMapping("/{id}")
-	public Country updateCountry(@PathVariable("id") long id, @Valid @RequestBody Country country) {
-		if (countryExists(id)) {
-			for (Country countryInDb : countries) {
-				if (countryInDb.getId() == id) {
-					countryInDb.setCountry(country.getCountry());
-					countryInDb.setCapital(country.getCapital());
-					countryInDb.setContinent(country.getContinent());
-					countryInDb.setPopulation(country.getPopulation());
-					return countryInDb;
-				}
-			}
-		}
-		throw new EntityNotFoundException("Entity with id " + id + " was not found");
+	public ResponseEntity<Country> updateCountry(@PathVariable("id") long id, @Valid @RequestBody Country country) {
+		Country updatedCountry = countryService.update(id, country);
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Location", "/user/" + String.valueOf(updatedCountry.getId()));
+		
+		return new ResponseEntity<Country>(updatedCountry, headers, HttpStatus.ACCEPTED);
 	}
 	
-	private boolean countryExists(long id) {
-		for (Country country : countries) {
-			if (country.getId() == id) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
+	//Delete
 	@DeleteMapping("/{id}") 
-	public void deleteCountry (@PathVariable("id") long id){
-		if (countryExists(id)) {
-			Iterator<Country> iterator = countries.iterator(); // check option for iterator other than Java.util
-			while (iterator.hasNext()) {
-				Country country = iterator.next();
-				if (country.getId() == id) {
-					iterator.remove();
-					return;
-				}
-			}
-		} else {
-			throw new EntityNotFoundException("Entity with id " + id + " was not found");
-		}
+	public ResponseEntity<Country> deleteCountry (@PathVariable("id") long id){
+		countryService.delete(id);
+		return ResponseEntity.accepted().build();
 	}
 }
