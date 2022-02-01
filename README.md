@@ -23,13 +23,13 @@ The project can be expanded by adding more data including links to maps, populat
 # API Output in Postman
 
 In progress
-[Postman Requests](docs/)
+[Postman Requests](docs/Postman requests_API Calls document.pdf)
 
 # Database Persistence SQL/H2
 
 In progress
-[SQL Database](docs/)
-[H2 Database](docs/)
+[SQL Database](docs/Database Persistence document_SQL.pdf)
+[H2 Database](docs/Database Persistence document_H2.pdf)
 
 # Tests SQL/H2
 
