@@ -43,7 +43,7 @@ public class CountryController {
 	
 	//Read by Id
 	@RequestMapping (path = "/{id}", method = {RequestMethod.GET})
-	public ResponseEntity<Country> getUserById(@PathVariable("id") long id) {
+	public ResponseEntity<Country> getCountryById(@PathVariable("id") long id) {
 		Country savedCountry = countryService.getById(id);
 		
 		ResponseEntity<Country> response = ResponseEntity.status(HttpStatus.OK).body(savedCountry);
