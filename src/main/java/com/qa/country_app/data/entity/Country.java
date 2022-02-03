@@ -123,6 +123,6 @@ public class Country {
 		return Objects.equals(capital, other.capital) && Objects.equals(continent, other.continent)
 				&& Objects.equals(country, other.country) && Objects.equals(id, other.id)
 				&& population == other.population;
-	} 
+	}
 
 }
