@@ -51,14 +51,14 @@ public class Country {
 		this.population = population;
 	}
 	
-//	public Country(long id, String country, String capital, String continent, int population) {
-//		super();
-//		this.id = id;
-//		this.country = country;
-//		this.capital = capital;
-//		this.continent = continent;
-//		this.population = population;
-//	}
+	public Country(long id, String country, String capital, String continent, int population) {
+		super();
+		this.id = id;
+		this.country = country;
+		this.capital = capital;
+		this.continent = continent;
+		this.population = population;
+	}
 
 	public Long getId() {
 		return id;
@@ -123,6 +123,6 @@ public class Country {
 		return Objects.equals(capital, other.capital) && Objects.equals(continent, other.continent)
 				&& Objects.equals(country, other.country) && Objects.equals(id, other.id)
 				&& population == other.population;
-	} 
+	}
 
 }

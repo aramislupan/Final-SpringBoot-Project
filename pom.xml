@@ -10,7 +10,8 @@
 	</parent>
 	<groupId>com.qa</groupId>
 	<artifactId>country_app</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<!-- Semver - Major patch, Minor patch, Patch/Bugfix - SNAPSHOT/RELEASE -->
+	<version>1.0.0-RELEASE</version>
 	<name>country_app</name>
 	<description>Final Project for Spring Boot</description>
 	<properties>

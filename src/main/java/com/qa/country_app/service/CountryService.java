@@ -1,6 +1,7 @@
 package com.qa.country_app.service;
 
 import java.util.List;
+//import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.qa.country_app.data.entity.Country;
 import com.qa.country_app.data.repository.CountryRepository;
+
 
 @Service
 public class CountryService {
@@ -25,10 +27,18 @@ public class CountryService {
 	}
 	
 	public Country getById(long id) {
-		if (countryRepository.existsById(id)) {
-			return countryRepository.findById(id).get();
-		}
-		throw new EntityNotFoundException("Country with id " + id + " was not found");
+		return countryRepository.findById(id).orElseThrow();
+		
+		//Option1
+//		return countryRepository.findById(id).orElseThrow(() -> {
+//		return new CountryNotFoundException("Country with id " + id + "was not found");
+//		});
+		
+		//Option2
+//		if (countryRepository.existsById(id)) {
+//			return countryRepository.findById(id).get();
+//		}
+//		throw new EntityNotFoundException("Country with id " + id + " was not found");
 	}
 	
 	public Country create(Country country) {
