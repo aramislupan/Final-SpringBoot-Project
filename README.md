@@ -6,7 +6,7 @@
 
 The overall objective of the project is to create a Spring Boot API, with utilisation of supporting tools, methodologies, and technologies, that encapsulates all fundamental and practical modules covered during training. Specifically, the project aims to create a Spring Boot API using Java, a managed database hosted locally or within the Cloud (H2 or MySQL) and the ability of making API calls (Postman) and checking persistence (Workbench or H2 console). 
 
-The projects main objective is to create a Country Information Database that is used to store information of countries in the world including their capital city, continent where they are located and it's overall population.
+The application main objective is to create a Country Information Database that is used to store information of countries in the world including their capital city, continents location and overall country population.
 
 ### How I expected the challenge to go?
 
@@ -42,21 +42,21 @@ The project can be expanded by adding more features including links to maps, pop
 
 # API Output in Postman
 
-For Postman requests & API calls tests refer to document "Postman requests_API Calls document.pdf": [Postman Requests](docs/Postman requests/)
+For Postman requests & API calls tests refer to document "Postman requests_API Calls document.pdf": [Postman Requests](docs/)
 
 # Database Persistence SQL/H2
 
-For SQL database persistence tests refer to document "Database Persistence document_SQL.pdf": [SQL Database](docs/Database Persistence SQL/)
+For SQL database persistence tests refer to document "Database Persistence document_SQL.pdf": [SQL Database](docs/)
 
-For H2 database persistence tests refer to document "Database Persistence document_H2.pdf": [H2 Database](docs/Database Persistence H2/)
+For H2 database persistence tests refer to document "Database Persistence document_H2.pdf": [H2 Database](docs/)
 
 # Unit and Integration Tests
 
-For test suites for the application refer to document "Unit and Integration tests document.pdf": [Results & Coverage Report](docs/Unit and Integration tests/) 
+For test suites for the application refer to document "Unit and Integration tests document.pdf": [Results & Coverage Report](docs/) 
 
 # Risk Assesment
 
-For Risk Assesment matrix refer to document "Risk Assesment-Assets & Management.pdf": [Results & Coverage Report](docs/Risk Assesment/)
+For Risk Assesment matrix refer to document "Risk Assesment-Assets & Management.pdf": [Risk Assesment Matrix](docs/)
 
 # Agile & Project Management
 
